@@ -1,21 +1,19 @@
 package com.api.netflix.TestData;
 
 
-import com.api.netflix.Models.Movies;
-import com.api.netflix.Repositories.moviesRepository;
-import com.api.netflix.Repositories.userRepository;
+import com.api.netflix.Repositories.MoviesRepository;
+import com.api.netflix.Repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import java.util.Arrays;
 
 @Component
 public class AppTest implements CommandLineRunner {
 
 
-    private final moviesRepository moviesRepository;
-    private final userRepository userRepository;
+    private final MoviesRepository moviesRepository;
+    private final UserRepository userRepository;
 
-    public AppTest(moviesRepository moviesController, userRepository userController) {
+    public AppTest(MoviesRepository moviesController, UserRepository userController) {
         this.moviesRepository = moviesController;
         this.userRepository = userController;
     }
