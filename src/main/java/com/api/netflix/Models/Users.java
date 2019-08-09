@@ -22,16 +22,18 @@ public class Users {
     @Column(name ="nationalID")
     private Integer nationalID;
 
-    @OneToMany(mappedBy ="Movies")
-    private List<Movies> movies;
+   // @OneToMany(mappedBy ="Movies")
+   // private List<Movies> movies;
 
-    public Users() {
+    private Users() {
     }
+
 
     public Users(String firstName, String lastName, Integer nationalID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalID = nationalID;
+        //this.movies=movies;
     }
 
     public long getId() {
@@ -65,4 +67,12 @@ public class Users {
     public void setNationalID(Integer nationalID) {
         this.nationalID = nationalID;
     }
+
+   // public List<Movies> getMovies() {
+   //     return movies;
+   // }
+
+    //public void setMovies(List<Movies> movies) {
+       // this.movies = movies;
+   // }
 }

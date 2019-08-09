@@ -12,15 +12,30 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long entryID;
 
-    @JoinColumn(name ="nationalID")
-    private Users users;
-
     @Column(name ="type")
     private String type;
 
 
+    private Categories() {
+    }
 
+    public Categories(String type) {
+        this.type = type;
+    }
 
+    public long getEntryID() {
+        return entryID;
+    }
 
+    public void setEntryID(long entryID) {
+        this.entryID = entryID;
+    }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

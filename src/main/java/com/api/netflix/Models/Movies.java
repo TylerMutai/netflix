@@ -20,16 +20,16 @@ public class Movies {
     @Column(name="movieGenre")
     private String movieGenre;
 
-    @OneToMany(mappedBy ="type")
-    private List <Categories> categories;
+    //@OneToMany(mappedBy ="type")
+    //private List <Categories> categories;
 
     private Movies() {
     }
 
-    public Movies(String movieName, String movieGenre, List<Categories> categories) {
+    public Movies(String movieName, String movieGenre) {
         this.movieName = movieName;
         this.movieGenre = movieGenre;
-        this.categories = categories;
+        //this.categories = categories;
     }
 
     public long getMovieId() {
@@ -56,11 +56,11 @@ public class Movies {
         this.movieGenre = movieGenre;
     }
 
-    public List<Categories> getCategories() {
-        return categories;
-    }
+   // public List<Categories> getCategories() {
+        //return categories;
+   // }
 
-    public void setCategories(List<Categories> categories) {
-        this.categories = categories;
-    }
+    //public void setCategories(List<Categories> categories) {
+        //this.categories = categories;
+   // }
 }
