@@ -20,16 +20,15 @@ public class Movies {
     @Column(name="movieGenre")
     private String movieGenre;
 
-    //@OneToMany(mappedBy ="type")
-    //private List <Categories> categories;
+    @ManyToOne()
+    private Categories category;
 
-    private Movies() {
-    }
+    private Movies() { }
 
-    public Movies(String movieName, String movieGenre) {
+    public Movies(String movieName, String movieGenre, Categories category) {
         this.movieName = movieName;
         this.movieGenre = movieGenre;
-        //this.categories = categories;
+        this.category = category;
     }
 
     public long getMovieId() {
@@ -43,7 +42,6 @@ public class Movies {
     public String getMovieName() {
         return movieName;
     }
-
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
@@ -51,16 +49,10 @@ public class Movies {
     public String getMovieGenre() {
         return movieGenre;
     }
-
     public void setMovieGenre(String movieGenre) {
         this.movieGenre = movieGenre;
     }
 
-   // public List<Categories> getCategories() {
-        //return categories;
-   // }
-
-    //public void setCategories(List<Categories> categories) {
-        //this.categories = categories;
-   // }
+    public Categories getCategory() { return category; }
+    public void setCategory(Categories category) { this.category = category; }
 }
