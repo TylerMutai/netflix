@@ -14,22 +14,28 @@ public class Movies {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long movieId;
 
-    @Column(name="moiveName")
+    @Column(name="movieName")
     private String movieName;
 
     @Column(name="movieGenre")
     private String movieGenre;
 
-    //@OneToMany(mappedBy ="type")
-    //private List <Categories> categories;
+    @Column(name = "movieType")
+    private String movieType;
+
+   // @JoinColumn( ="type")
+    //private Categories movieType;
+
+
 
     private Movies() {
     }
 
-    public Movies(String movieName, String movieGenre) {
+    public Movies(String movieName, String movieGenre, String movieType) {
         this.movieName = movieName;
         this.movieGenre = movieGenre;
-        //this.categories = categories;
+        this.movieType=movieType;
+
     }
 
     public long getMovieId() {
@@ -44,6 +50,10 @@ public class Movies {
         return movieName;
     }
 
+    public String getMovieType() {
+        return movieType;
+    }
+
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
@@ -56,7 +66,11 @@ public class Movies {
         this.movieGenre = movieGenre;
     }
 
-   // public List<Categories> getCategories() {
+    public void setMovieType(String movieType) {
+        this.movieType = movieType;
+    }
+
+    // public List<Categories> getCategories() {
         //return categories;
    // }
 

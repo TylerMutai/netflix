@@ -25,5 +25,9 @@ public class AppTest implements CommandLineRunner {
 
 
 
+    Movies movie1 = new Movies("Endgame","Action");
+    moviesRepository.saveAll(Arrays.asList(movie1));
+
+
     }
 }

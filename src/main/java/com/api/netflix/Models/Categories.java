@@ -1,10 +1,11 @@
 package com.api.netflix.Models;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
-@Table(name="Categories")
+@Table(name="categories")
 
 public class Categories {
 
@@ -12,11 +13,22 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long entryID;
 
+    @Column(name = "categoryId")
+    private Integer categoryId;
+
     @Column(name ="type")
     private String type;
 
 
+
+
+
     private Categories() {
+    }
+
+    public Categories(Integer categoryId, String type) {
+        this.categoryId = categoryId;
+        this.type = type;
     }
 
     public Categories(String type) {
@@ -35,7 +47,15 @@ public class Categories {
         return type;
     }
 
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 }
