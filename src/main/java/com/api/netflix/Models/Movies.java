@@ -3,6 +3,7 @@ package com.api.netflix.Models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name ="Movies")
@@ -23,19 +24,27 @@ public class Movies {
     @Column(name = "movieType")
     private String movieType;
 
-   // @JoinColumn( ="type")
-    //private Categories movieType;
+
+    @ManyToOne
+    @JoinColumn(name = "UserId",nullable = false)
+    private Users users;
+
+    @OneToMany(mappedBy ="movies")
+    private Set<Categories> categories;
 
 
 
-    private Movies() {
+
+
+    public Movies() {
     }
 
-    public Movies(String movieName, String movieGenre, String movieType) {
+    public Movies(String movieName, String movieGenre, String movieType, Users users, Set<Categories> categories) {
         this.movieName = movieName;
         this.movieGenre = movieGenre;
-        this.movieType=movieType;
-
+        this.movieType = movieType;
+        this.users = users;
+        this.categories = categories;
     }
 
     public long getMovieId() {
@@ -50,10 +59,6 @@ public class Movies {
         return movieName;
     }
 
-    public String getMovieType() {
-        return movieType;
-    }
-
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
@@ -66,15 +71,27 @@ public class Movies {
         this.movieGenre = movieGenre;
     }
 
+    public String getMovieType() {
+        return movieType;
+    }
+
     public void setMovieType(String movieType) {
         this.movieType = movieType;
     }
 
-    // public List<Categories> getCategories() {
-        //return categories;
-   // }
+    public Users getUsers() {
+        return users;
+    }
 
-    //public void setCategories(List<Categories> categories) {
-        //this.categories = categories;
-   // }
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Set<Categories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Categories> categories) {
+        this.categories = categories;
+    }
 }

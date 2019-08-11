@@ -1,61 +1,53 @@
 package com.api.netflix.Models;
 
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.*;
 
 @Entity
-@Table(name="categories")
-
+@Table(name = "categories")
 public class Categories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long entryID;
+    private long catId;
 
-    @Column(name = "categoryId")
-    private Integer categoryId;
+    @Column(name ="category")
+    private String category;
 
-    @Column(name ="type")
-    private String type;
-
-
-
+    @ManyToOne
+    @JoinColumn(name ="movieId")
+    private Movies movies;
 
 
-    private Categories() {
+    public Categories() {
     }
 
-    public Categories(Integer categoryId, String type) {
-        this.categoryId = categoryId;
-        this.type = type;
+    public Categories(String category, Movies movies) {
+        this.category = category;
+        this.movies = movies;
     }
 
-    public Categories(String type) {
-        this.type = type;
+    public long getCatId() {
+        return catId;
     }
 
-    public long getEntryID() {
-        return entryID;
+    public void setCatId(long catId) {
+        this.catId = catId;
     }
 
-    public void setEntryID(long entryID) {
-        this.entryID = entryID;
+    public String getCategory() {
+        return category;
     }
 
-    public String getType() {
-        return type;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Movies getMovies() {
+        return movies;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setMovies(Movies movies) {
+        this.movies = movies;
     }
 }

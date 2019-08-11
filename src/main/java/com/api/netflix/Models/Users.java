@@ -3,6 +3,7 @@ package com.api.netflix.Models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name ="Users")
@@ -22,18 +23,18 @@ public class Users {
     @Column(name ="nationalID")
     private Integer nationalID;
 
-   // @OneToMany(mappedBy ="Movies")
-   // private List<Movies> movies;
+    @OneToMany(mappedBy ="users")
+    private Set<Movies> movies;
 
-    private Users() {
+    public Users() {
     }
 
 
-    public Users(String firstName, String lastName, Integer nationalID) {
+    public Users(String firstName, String lastName, Integer nationalID, Set <Movies> movies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalID = nationalID;
-        //this.movies=movies;
+        this.movies=movies;
     }
 
     public long getId() {
@@ -68,11 +69,11 @@ public class Users {
         this.nationalID = nationalID;
     }
 
-   // public List<Movies> getMovies() {
-   //     return movies;
-   // }
+    public Set<Movies> getMovies() {
+       return movies;
+   }
 
-    //public void setMovies(List<Movies> movies) {
-       // this.movies = movies;
-   // }
+    public void setMovies(Set<Movies> movies) {
+       this.movies = movies;
+   }
 }

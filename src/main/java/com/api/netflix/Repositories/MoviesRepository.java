@@ -7,9 +7,4 @@ import java.util.List;
 
 public interface moviesRepository extends JpaRepository<Movies, Long> {
 
-
-    List<Movies> findAllByMovieTypeIs(String type);
-
-
-    Movies findByMovieId(long id);
 }
