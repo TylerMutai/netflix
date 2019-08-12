@@ -1,70 +1,60 @@
 package com.api.netflix.Controllers;
 
-
 import com.api.netflix.Models.Movies;
-import com.api.netflix.Repositories.moviesRepository;
-import com.api.netflix.Repositories.userRepository;
-import javassist.NotFoundException;
+import com.api.netflix.Models.Users;
+import com.api.netflix.Repositories.MoviesRepository;
+import com.api.netflix.Repositories.UsersRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value ="movies")
-public class moviesController {
+public class MoviesController {
 
-    private final moviesRepository moviesRepository;
-    private final userRepository userRepository;
+    private final MoviesRepository moviesRepository;
+    private final UsersRepository usersRepository;
 
-
-    public moviesController(moviesRepository moviesRepository, userRepository userRepository) {
+    public MoviesController(MoviesRepository moviesRepository, UsersRepository usersRepository) {
         this.moviesRepository = moviesRepository;
-        this.userRepository = userRepository;
-
+        this.usersRepository = usersRepository;
     }
 
-    //retrieve and display all the movies
+//    RETRIEVE ALL MOVIES
     @GetMapping
-    public List<Movies> pullMovies() {
+    public List<Movies> getAllMovies() {
         return moviesRepository.findAll();
 
     }
+//    RETRIEVE ALL MOVIES BY USER'S NATIONAL ID
+    @GetMapping(value = "{nationalId}/movies")
+    public List<Movies> findMovieByUserNationalId(@PathVariable Integer nationalId) {
+    return moviesRepository.findByUsers_NationalID(nationalId);
+    }
 
-    @GetMapping(value = "{id}")
-    public Movies findBymovieID(@PathVariable Long id) {
+//    RETRIEVE A MOVIE BY ITS ID
+    @GetMapping(value = "{nationalId}/movies/{id}")
+    public List<Movies> findByMovieID(@PathVariable Long id, @PathVariable Integer nationalId) {
+        moviesRepository.findByUsers_NationalID(nationalId);
+        return moviesRepository.findAllById(id);
+    }
 
-        Movies movies
-                = null;
-        try {
-            movies = moviesRepository.findById(id).orElseThrow(
-                    () -> new NotFoundException("no movie with the id" + id + "was found"));
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-        movies.setMovieId(movies.getMovieId());
+//    UPDATE A MOVIES CONTENT
+    @PatchMapping(value = "{nationalId}/movies/{id}")
+    public Movies movies(@PathVariable Long id, @PathVariable Integer nationalId, @RequestBody Movies movies) {
+        moviesRepository.findByUsers_NationalID(nationalId);
+
+        movies.getId(id);
         movies.setMovieName(movies.getMovieName());
-        movies.setMovieGenre(movies.getMovieGenre());
+        movies.setMovieType(movies.getMovieType());
+        movies.setCategories(movies.getCategories());
 
-        return movies;
+        return moviesRepository.save(movies);
+    }
 
-
+    //      SEARCH FOR MOVIES BY NAME
+    @GetMapping(value = "search")
+    public List<Movies> search(@RequestParam String movieName) {
+        return moviesRepository.findByMovieName(movieName);
     }
 }
-
-   /* @PostMapping(value = "{id}/addmovie")
-    public Users addnew( @PathVariable Long id, @RequestBody Movies movies) {
-
-        Movies addnew =moviesRepository.findByMovieId(id);
-        Categories categories=categoryRepository.getOne(id);
-
-        addnew.setMovieName(addnew.getMovieName());
-        addnew.setMovieGenre(addnew.getMovieGenre());
-        categories.setCategoryId(categories.getCategoryId());
-        addnew.setMovieType(addnew.getMovieType());
-
-        return moviesRepository.save(addnew);
-
-
-    }
-
-}*/

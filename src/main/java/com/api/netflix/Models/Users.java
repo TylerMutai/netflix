@@ -1,18 +1,15 @@
 package com.api.netflix.Models;
 
-
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name ="Users")
-
+@Table(name ="users")
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private long id;
 
     @Column(name ="firstName")
     private String firstName;
@@ -24,31 +21,25 @@ public class Users {
     private Integer nationalID;
 
     @OneToMany(mappedBy ="users")
-    private Set<Movies> movies;
+    private List<Movies> movies;
 
-    public Users() {
-    }
+//    CONSTRUCTORS
+    public Users() { }
 
-
-    public Users(String firstName, String lastName, Integer nationalID, Set <Movies> movies) {
+    public Users(String firstName, String lastName, Integer nationalID, List <Movies> movies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalID = nationalID;
         this.movies=movies;
     }
 
-    public long getId() {
-        return userId;
-    }
-
-    public void setId(long id) {
-        this.userId = id;
-    }
+//    GETTERS AND SETTERS
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -56,7 +47,6 @@ public class Users {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -64,16 +54,10 @@ public class Users {
     public Integer getNationalID() {
         return nationalID;
     }
-
     public void setNationalID(Integer nationalID) {
         this.nationalID = nationalID;
     }
 
-    public Set<Movies> getMovies() {
-       return movies;
-   }
-
-    public void setMovies(Set<Movies> movies) {
-       this.movies = movies;
-   }
+    public List<Movies> getMovies() { return movies; }
+    public void setMovies(List<Movies> movies) { this.movies = movies; }
 }

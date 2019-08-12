@@ -1,6 +1,8 @@
 package com.api.netflix.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,22 +17,22 @@ public class Categories {
     private String category;
 
     @ManyToOne
-    @JoinColumn(name ="movieId")
+    @JsonIgnore
+    @JoinColumn(name ="movie_id")
     private Movies movies;
 
-
-    public Categories() {
-    }
+//    CONSTRUCTORS
+    public Categories() { }
 
     public Categories(String category, Movies movies) {
         this.category = category;
         this.movies = movies;
     }
 
+//    GETTERS AND SETTERS
     public long getCatId() {
         return catId;
     }
-
     public void setCatId(long catId) {
         this.catId = catId;
     }
@@ -38,16 +40,10 @@ public class Categories {
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
 
-    public Movies getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Movies movies) {
-        this.movies = movies;
-    }
+    public Movies getMovies() { return movies; }
+    public void setMovies(Movies movies) { this.movies = movies; }
 }
