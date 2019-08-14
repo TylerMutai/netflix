@@ -1,61 +1,49 @@
 package com.api.netflix.Models;
 
-import javax.persistence.*;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name="categories")
-
+@Table(name = "categories")
 public class Categories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long entryID;
+    private long catId;
 
-    @Column(name = "categoryId")
-    private Integer categoryId;
+    @Column(name ="category")
+    private String category;
 
-    @Column(name ="type")
-    private String type;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name ="movie_id")
+    private Movies movies;
 
+//    CONSTRUCTORS
+    public Categories() { }
 
-
-
-
-    private Categories() {
+    public Categories(String category, Movies movies) {
+        this.category = category;
+        this.movies = movies;
     }
 
-    public Categories(Integer categoryId, String type) {
-        this.categoryId = categoryId;
-        this.type = type;
+//    GETTERS AND SETTERS
+    public long getCatId() {
+        return catId;
+    }
+    public void setCatId(long catId) {
+        this.catId = catId;
     }
 
-    public Categories(String type) {
-        this.type = type;
+    public String getCategory() {
+        return category;
+    }
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public long getEntryID() {
-        return entryID;
-    }
-
-    public void setEntryID(long entryID) {
-        this.entryID = entryID;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
+    public Movies getMovies() { return movies; }
+    public void setMovies(Movies movies) { this.movies = movies; }
 }

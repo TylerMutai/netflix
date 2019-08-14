@@ -1,17 +1,15 @@
 package com.api.netflix.Models;
 
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name ="Users")
-
+@Table(name ="users")
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private long id;
 
     @Column(name ="firstName")
     private String firstName;
@@ -22,32 +20,26 @@ public class Users {
     @Column(name ="nationalID")
     private Integer nationalID;
 
-   // @OneToMany(mappedBy ="Movies")
-   // private List<Movies> movies;
+    @OneToMany(mappedBy ="users")
+    private List<Movies> movies;
 
-    private Users() {
-    }
+//    CONSTRUCTORS
+    public Users() { }
 
-
-    public Users(String firstName, String lastName, Integer nationalID) {
+    public Users(String firstName, String lastName, Integer nationalID, List <Movies> movies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalID = nationalID;
-        //this.movies=movies;
+        this.movies=movies;
     }
 
-    public long getId() {
-        return userId;
-    }
-
-    public void setId(long id) {
-        this.userId = id;
-    }
+//    GETTERS AND SETTERS
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -55,7 +47,6 @@ public class Users {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -63,16 +54,10 @@ public class Users {
     public Integer getNationalID() {
         return nationalID;
     }
-
     public void setNationalID(Integer nationalID) {
         this.nationalID = nationalID;
     }
 
-   // public List<Movies> getMovies() {
-   //     return movies;
-   // }
-
-    //public void setMovies(List<Movies> movies) {
-       // this.movies = movies;
-   // }
+    public List<Movies> getMovies() { return movies; }
+    public void setMovies(List<Movies> movies) { this.movies = movies; }
 }

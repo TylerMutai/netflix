@@ -1,80 +1,68 @@
 package com.api.netflix.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name ="Movies")
-
+@Table(name ="movies")
 public class Movies {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long movieId;
+    private long id;
 
     @Column(name="movieName")
     private String movieName;
 
-    @Column(name="movieGenre")
-    private String movieGenre;
-
     @Column(name = "movieType")
     private String movieType;
 
-   // @JoinColumn( ="type")
-    //private Categories movieType;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "users_id")
+    private Users users;
 
+    @OneToMany(mappedBy ="movies")
+    private List<Categories> categories;
 
+//    CONSTRUCTORS
+    public Movies() { }
 
-    private Movies() {
-    }
-
-    public Movies(String movieName, String movieGenre, String movieType) {
+    public Movies(String movieName, String movieType, Users users, List<Categories> categories) {
         this.movieName = movieName;
-        this.movieGenre = movieGenre;
-        this.movieType=movieType;
-
+        this.movieType = movieType;
+        this.users = users;
+        this.categories = categories;
     }
 
-    public long getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(long movieId) {
-        this.movieId = movieId;
-    }
+    //    GETTERS AND SETTERS
+    public long getId(Long id) { return this.id; }
+    public void setId(long id) { this.id = id; }
 
     public String getMovieName() {
         return movieName;
+    }
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 
     public String getMovieType() {
         return movieType;
     }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public String getMovieGenre() {
-        return movieGenre;
-    }
-
-    public void setMovieGenre(String movieGenre) {
-        this.movieGenre = movieGenre;
-    }
-
     public void setMovieType(String movieType) {
         this.movieType = movieType;
     }
 
-    // public List<Categories> getCategories() {
-        //return categories;
-   // }
+    public Users getUsers() {
+        return users;
+    }
+    public void setUsers(Users users) {
+        this.users = users;
+    }
 
-    //public void setCategories(List<Categories> categories) {
-        //this.categories = categories;
-   // }
+    public List<Categories> getCategories() { return categories; }
+    public void setCategories(List<Categories> categories) { this.categories = categories; }
+
 }

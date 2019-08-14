@@ -2,8 +2,8 @@ package com.api.netflix.TestData;
 
 
 import com.api.netflix.Models.Movies;
-import com.api.netflix.Repositories.moviesRepository;
-import com.api.netflix.Repositories.userRepository;
+import com.api.netflix.Repositories.MoviesRepository;
+import com.api.netflix.Repositories.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.util.Arrays;
@@ -12,22 +12,14 @@ import java.util.Arrays;
 public class AppTest implements CommandLineRunner {
 
 
-    private final moviesRepository moviesRepository;
-    private final userRepository userRepository;
+    private final MoviesRepository moviesRepository;
+    private final UsersRepository usersRepository;
 
-    public AppTest(moviesRepository moviesController, userRepository userController) {
-        this.moviesRepository = moviesController;
-        this.userRepository = userController;
+    public AppTest(MoviesRepository moviesRepository, UsersRepository usersRepository) {
+        this.moviesRepository = moviesRepository;
+        this.usersRepository = usersRepository;
     }
 
     @Override
-    public void run(String... args) throws Exception {
-
-
-
-    Movies movie1 = new Movies("Endgame","Action");
-    moviesRepository.saveAll(Arrays.asList(movie1));
-
-
-    }
+    public void run(String... args) throws Exception { }
 }
